@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter.ttk import Combobox
-from tkinter import  messagebox
+from tkinter import messagebox
 from DB import get_by_id, update_user
 
 name =''

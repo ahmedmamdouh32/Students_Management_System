@@ -54,18 +54,14 @@ def display_create(root):
     Label(create,text = f"Major : ",bg="#06275c",fg='white',font="arial 14").place(x = 5,y=320)
     Label(create,text = f"Academic year : ",bg="#06275c",fg='white',font="arial 14").place(x = 5,y=360)
     Label(create,text = f"Payment Status : ",bg="#06275c",fg='white',font="arial 14").place(x = 5,y=400)
-    name =StringVar()
-    email = StringVar()
-    phone_number = StringVar()
-    user_id = StringVar()
-    intake_no = StringVar()
-    major = StringVar()
-    academic_year = StringVar()
+    name           = StringVar()
+    email          = StringVar()
+    phone_number   = StringVar()
+    user_id        = StringVar()
+    intake_no      = StringVar()
+    major          = StringVar()
+    academic_year  = StringVar()
     payment_status = StringVar()
-
-
-
-
 
     entry_name = Entry(create,font ="arial 14",textvariable=name)
     entry_email = Entry(create,font ="arial 14",textvariable=email)

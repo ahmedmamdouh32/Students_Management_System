@@ -1,8 +1,7 @@
-from io import BytesIO
 from tkinter import *
 from DB import get_data
-from PIL import Image, ImageTk
 from tkinter import messagebox
+
 def display_details(user_id,root):
     if user_id == 0:
         messagebox.showerror("Select user","Select a user first !")
@@ -23,11 +22,4 @@ def display_details(user_id,root):
     Label(details,text = f"Academic year : {user_data[0][6]}",bg="#06275c",fg='white',font="arial 14").place(x = 5,y=360)
     Label(details,text = f"Payment Status : {user_data[0][7]}",bg="#06275c",fg='white',font="arial 14").place(x = 5,y=400)
     Button(details, text="Close",font = "Arial 25",height=1,command=lambda:details.destroy(),bg = "#eed055").place(relx =0.5,y=450,anchor="center")
-
-    m = Image.open(BytesIO(user_data[0][8])) #replace the parameter with the image path and it will work
-
-    print(user_data[0][8])
-    resized_image = m.resize((300, 200))
-    img = ImageTk.PhotoImage(resized_image)
-    Label(details, image=img).place(x=10, y=20)
     details.mainloop()
