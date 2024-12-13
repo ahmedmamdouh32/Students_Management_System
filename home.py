@@ -1,12 +1,13 @@
 from contextlib import nullcontext
 from tkinter import *
 from tkinter import ttk
-from DB import get_data
+from DB import *
 from datetime import datetime
 from PIL import Image, ImageTk
 from DetailsWindow import display_details
-
-
+from CreateWindow import display_create
+from UpdateWindow import display_update
+from tkinter import messagebox
 
 def on_key_press(event):
     if event.keysym == "Escape":
@@ -56,6 +57,23 @@ def search_item_buttons_handler(option):
     entry_search_intake.config(bg="lightblue" if option == "intake" else "SystemButtonFace")
     entry_search_id.config(bg="lightblue" if option == "id" else "SystemButtonFace")
 
+def update_table():
+    for item in table.get_children():
+        table.delete(item)
+    data = get_data('SELECT ID, Name, Phone_Number, "Intake_No" FROM students')
+    numbered_data = [(i + 1, *row) for i, row in enumerate(data)]
+    for i in numbered_data:
+        table.insert("", END, values=i)
+
+def delete_user():
+    #global table_object_Selected
+    user_data = get_by_id(table_object_Selected)
+    response = messagebox.askyesno("Confirmation", f"Are you sure you want to delete user :{user_data[1]}?")
+    if response:
+        delete_by_id(table_object_Selected)
+        messagebox.showinfo('Done',"user deleted successfully !!")
+    else:
+        pass
 
 root = Tk()
 root.title("Home")
@@ -126,16 +144,15 @@ style.configure(
     fieldbackground="#e6f7ff",  # Background color of the entire table
     font=("Arial", 12),    # Font for rows
 )
-table.bind("<ButtonRelease-1>", on_item_click)
-
+table.bind("<ButtonRelease-1>", on_item_click) #to return the user number selected
 ########################################################################################
 
 
 ######################  CRUD operations buttons    ######################
-button_create = Button(text = "Create",font="arial 30",fg="#06275c",bg="#eed055")
+button_create = Button(text = "Create",font="arial 30",fg="#06275c",bg="#eed055",command =lambda: display_create(root))
 button_Details = Button(text = "Details",font="arial 30",fg="#06275c",bg="#eed055",command=lambda: display_details(table_object_Selected,root))
-button_Update = Button(text = "Update",font="arial 30",fg="#06275c",bg="#eed055")
-button_Delete = Button(text = "Delete",font="arial 30",fg="#06275c",bg="#eed055")
+button_Update = Button(text = "Update",font="arial 30",fg="#06275c",bg="#eed055",command= lambda:display_update(root,table_object_Selected))
+button_Delete = Button(text = "Delete",font="arial 30",fg="#06275c",bg="#eed055",command = delete_user)
 button_create.place(x=450,y=680,anchor = "center")
 button_Details.place(x=662,y=680,anchor = "center")
 button_Update.place(x=874,y=680,anchor = "center")
@@ -144,14 +161,16 @@ button_Delete.place(x=1086,y=680,anchor = "center")
 
 
 
-######################  Fake Data    ######################
-data = get_data('SELECT ID, Name, Phone_Number, "Intake_No." FROM students')
-numbered_data = [(i+1,*row,"Update","Delete") for i , row in enumerate(data)]
-for i in numbered_data:
-    table.insert("", END, values=i)
-##########################################################
+######################  Reload Table Button    ######################
+reload_icon = ImageTk.PhotoImage(Image.open("Images/reload.png").resize((50,50)))
+button_reload = Button(text = "Reload",font="arial 30",fg="#06275c",bg="#eed055",image = str(reload_icon),command =update_table)
+button_reload.place(x=1180,y=210)
+#######################################################################
 
 
+######################  Load DataBase Data    ######################
+update_table()
+####################################################################
 
 
 
