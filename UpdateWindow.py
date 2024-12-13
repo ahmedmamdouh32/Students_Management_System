@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter import  messagebox
-
-from DB import add_user, get_by_id, update_user
+from DB import get_by_id, update_user
 
 name =''
 email = ''
@@ -14,18 +13,10 @@ academic_year = 0
 payment_status = ''
 
 def update_student(update):
-    # response = messagebox.askyesno("Confirmation", "Are you sure you want to Update user?")
-    # if response:
-    #     global name, email, user_id, phone_number, email, major, intake_no, academic_year, payment_status
-    #     user_data = [int(user_id.get()), name.get(), phone_number.get(), email.get(), major.get(), int(intake_no.get()),
-    #                  int(academic_year.get()), payment_status.get()]
-    #     update_user(user_data)
-    # else:
-    #     pass
     response = messagebox.askyesno("Confirmation", "Are you sure you want to update user?")
     if response:
         global name, email, user_id, phone_number, email, major, intake_no, academic_year, payment_status
-        if(name.get() =='' or phone_number.get() =='' or email.get() =='' or major.get() =='' or intake_no.get() =='' or academic_year.get() =='' or payment_status.get() ==''):
+        if name.get() == '' or phone_number.get() == '' or email.get() == '' or major.get() == '' or intake_no.get() == '' or academic_year.get() == '' or payment_status.get() == '':
             messagebox.showerror('Missing data', "Fill all slots !")
             update.deiconify()
             update.lift()  # Bring the window to the front
@@ -37,6 +28,8 @@ def update_student(update):
                          int(academic_year.get()), payment_status.get()]
             update_user(user_data)
             messagebox.showinfo('Done',"user updated successfully !!")
+            update.destroy()
+            return 0
 
     else:
         update.deiconify()
@@ -45,6 +38,9 @@ def update_student(update):
 
 
 def display_update(root,__user_id__):
+    if __user_id__ == 0:
+        messagebox.showerror("Select user","Select a user first !")
+        return 0
     global name,email,phone_number,user_id,intake_no,major,academic_year,payment_status
     old_user_data=get_by_id(__user_id__)
 
@@ -78,9 +74,6 @@ def display_update(root,__user_id__):
     major.set(old_user_data[4])
     academic_year.set(old_user_data[6])
     payment_status.set(old_user_data[7])
-
-
-
 
     entry_name = Entry(update,font ="arial 14",textvariable=name)
     entry_email = Entry(update,font ="arial 14",textvariable=email)

@@ -25,6 +25,7 @@ def delete_by_id(user_id):
     cursor.execute(command)
     connection.commit()  # to assure execution of query
     connection.close()
+    return 0
 
 def get_by_id(user_id):
     connection = sql.connect('Database.db')
@@ -44,6 +45,7 @@ def update_user(user_data):
     cursor.execute(command)
     connection.commit()  # to assure execution of query
     connection.close()
+    return 0
 
 def is_id_valid(user_id):
     connection = sql.connect('Database.db')
@@ -54,3 +56,14 @@ def is_id_valid(user_id):
     result = cursor.fetchone()[0]
     connection.close()
     return result
+
+
+def search_db(search_category, item):
+    connection = sql.connect('Database.db')
+    cursor = connection.cursor()  # we use it as a gate to write in database tables
+    command = f"SELECT ID, Name, Phone_Number, Intake_No FROM Students WHERE {search_category} LIKE '{item}%'"
+    cursor.execute(command)
+    rows = cursor.fetchall()
+    connection.commit()  # to assure execution of query
+    connection.close()
+    return rows

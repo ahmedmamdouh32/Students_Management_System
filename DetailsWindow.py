@@ -2,7 +2,11 @@ from io import BytesIO
 from tkinter import *
 from DB import get_data
 from PIL import Image, ImageTk
+from tkinter import messagebox
 def display_details(user_id,root):
+    if user_id == 0:
+        messagebox.showerror("Select user","Select a user first !")
+        return 0
     user_data = get_data(f'SELECT * FROM students WHERE id = {user_id}')
     details =Toplevel(root)
     details.title("Student details")

@@ -3,6 +3,7 @@ from tkinter.ttk import Combobox
 from DB import is_id_valid
 from tkinter import messagebox
 from DB import add_user
+
 name =''
 email = ''
 phone_number = ''
@@ -16,7 +17,7 @@ def create_student(create):
     response = messagebox.askyesno("Confirmation", "Are you sure you want to create user?")
     if response:
         global name, email, user_id, phone_number, email, major, intake_no, academic_year, payment_status
-        if(user_id.get() == ''or name.get() =='' or phone_number.get() =='' or email.get() =='' or major.get() =='' or intake_no.get() =='' or academic_year.get() =='' or payment_status.get() ==''):
+        if user_id.get() == ''or name.get() == '' or phone_number.get() == '' or email.get() == '' or major.get() == '' or intake_no.get() == '' or academic_year.get() == '' or payment_status.get() == '':
             messagebox.showerror('Missing data', "Fill all slots !")
             create.deiconify()
             create.lift()  # Bring the window to the front
@@ -31,11 +32,10 @@ def create_student(create):
             user_data = [int(user_id.get()), name.get(), phone_number.get(), email.get(), major.get(), int(intake_no.get()),int(academic_year.get()), payment_status.get()]
             add_user(user_data)
             messagebox.showinfo('Done',"user created successfully !!")
+            create.destroy()
 
     else:
-        create.deiconify()
-        create.lift()  # Bring the window to the front
-        create.focus_force()
+        pass
 
 
 def display_create(root):
@@ -85,6 +85,6 @@ def display_create(root):
     list_payment_status.place(x=180, y=400)
 
     Button(create, text="Close",font = "Arial 25",height=1,command=lambda:create.destroy(),bg = "#eed055").place(relx =0.4,y=480,anchor ="center")
-    Button(create, text="ADD",font = "Arial 25",height=1,command=lambda :create_student(create),bg = "#eed055").place(relx =0.6,y=480,anchor="center")
+    Button(create, text="ADD",font = "Arial 25",height=1,command=lambda:create_student(create),bg = "#eed055").place(relx =0.6,y=480,anchor="center")
 
     create.mainloop()
