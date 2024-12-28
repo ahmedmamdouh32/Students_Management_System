@@ -3,11 +3,10 @@
 <br>
 <h4>In this repo you will find a python script for an application that manages students data and tracks their payment states, It also connects all students
     data with the database(SQLite)</h4>
-
+    
+<br>
 <br>
 <img src="https://github.com/ahmedmamdouh32/Students_Management_System/blob/master/GUI_Windows/HomeWindowPNG.PNG?raw=true" alt="Square wave" width="50%"  align="right">
-
-<br>
 
 <h6>We used python language as the default programming language for some reasons:</h6>
 
