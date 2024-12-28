@@ -26,11 +26,14 @@
 <li><p><b>Details Window (DetailsWindow.py)</b> that shows all data of selected student</p></li>
 <li><p><b>Update Window (UpdateWindow.py)</b> to update data of selected student</p></li>
 <li><p>Some important Folders :</p>
-  <ul>
-    
-    <li><br>GUI_Windows</br> : contains the view of every window in application </li>
-  </ul>
+<ul>
+  <li><b>GUI_Windows</b> this folder contains images of all windows of the application</li>
+  <li><b>images</b> this folder contains images that we used for the gui</li>
+</ul>
 </li>
 </ul>
+
+
+
 
 
