@@ -1,10 +1,11 @@
-<img src="https://www.electronics-notes.com/images/waveform-square-wave-01.svg" alt="Square wave" width="500" height="360" align="right">
 
 <h1>Student Management System</h1>
 <br>
 <h4>In this repo you will find a python script for an application that manages students data and tracks their payment states, It also connects all students
     data with the database(SQLite)</h4>
 
+
+<img src="https://github.com/ahmedmamdouh32/Students_Management_System/blob/master/GUI_Windows/HomeWindowPNG.PNG?raw=true" alt="Square wave" width="50%"  align="right">
 <br>
 <br>
 
